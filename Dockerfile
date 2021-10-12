@@ -5,8 +5,8 @@ RUN	apt update -y \
 	apt upgrade -y \
 	apt-get install git -y \
 	git clone https://github.com/hlissner/doom-emacs.git \
-	grep -ril "2.23" \doom-emacs | xargs sed -i 's/2.23/2.20/g' \
-	.emacs.d/bin/doom install -y
+	grep -ril "2.23" \\doom-emacs | xargs sed -i 's/2.23/2.20/g' \
+	/doom-emacs/install -y
 
 ENV PATH="~/.enacs.d/bin:$PATH"
 	
