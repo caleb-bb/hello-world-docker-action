@@ -1,8 +1,12 @@
 # Container image that runs your code
 FROM alpine:3.10
 
-# Copies your code file from your action repository to the filesystem path `/` of the container
-COPY entrypoint.sh /entrypoint.sh
-
-# Code file to execute when the docker container starts up (`entrypoint.sh`)
-ENTRYPOINT ["/entrypoint.sh"]
+RUN	apt update -y \
+	apt upgrade -y \
+	apt-get install git -y \
+	git clone https://github.com/hlissner/doom-emacs.git \
+	grep -ri "2.23" \.emacs.d | xargs sed 's/2.23/2.20/g' \
+	.emacs.d/bin/doom install -y
+ENV PATH="~/.enacs.d/bin:$PATH"
+	
+CMD ["emacs"]
